@@ -2,9 +2,6 @@ import discord
 import asyncio
 import datetime
 import os
-import lupa
-from lupa import LuaRuntime
-lua = LuaRuntime(unpack_returned_tuples=True)
 import sys, traceback
 import requests, time
 from discord.utils import get
