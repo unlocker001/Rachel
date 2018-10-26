@@ -75,7 +75,10 @@ async def on_message(message):
             embed.set_image(url=(str(lastAnime["img"])).replace("\\",""))
             await client.send_message(AnimeLogChannel, embed=embed)
 
-
+@client.event
+async def on_member_join(member):
+    Role = discord.utils.get(user.server.roles, name="Otaku")
+    await client.add_roles(user, Role)
 
 @client.event
 async def on_reaction_add(reaction, user):
