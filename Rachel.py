@@ -74,8 +74,8 @@ async def on_message(message):
 
 @client.event
 async def on_member_join(member):
-    Role = discord.utils.get(user.server.roles, name="Otaku")
-    await client.add_roles(user, Role)
+    Role = discord.utils.get(member.server.roles, name="Otaku")
+    await client.add_roles(member, Role)
 
 @client.event
 async def on_reaction_add(reaction, user):
