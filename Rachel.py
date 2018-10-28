@@ -41,7 +41,7 @@ async def check_new_animes():
             embed.add_field(name="Year: " , value=str(lastAnime["Year"]), inline=True)
             embed.add_field(name="Rate: " , value=str(lastAnime["Rate"]), inline=True)
             embed.add_field(name="Gen: " , value=str(lastAnime["Gen"].replace("[","").replace('"',"").replace("]","").replace(",",", ")), inline=True)
-            embed.add_field(name="time: " , value=str(lastAnime["time"].replace(",- ", "")), inline=True)
+            embed.add_field(name="Time: " , value=str(lastAnime["time"].replace(",- ", "")), inline=True)
             embed.add_field(name="Rating: " , value=str(lastAnime["Rating"]), inline=True)
             embed.set_image(url=(str(lastAnime["img"])).replace("\\",""))
             await client.send_message(AnimeLogChannel, embed=embed)
