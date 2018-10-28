@@ -30,8 +30,9 @@ async def check_new_animes():
     while(True):
         newAnime = eval(requests.get("http://animeslayer.com/Data/newSystem/NewGet.php?fu=1").content)[0]
         if newAnime == lastAnime:
-            return
+            print("No new episode")
         else:
+            print("New episode")
             lastAnime = eval(requests.get("http://animeslayer.com/Data/newSystem/NewGet.php?fu=1").content)[0]
             AnimeLogChannel = discord.Object(id=504382218961944607)
             embed=discord.Embed(color=0xffa500)
