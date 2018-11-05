@@ -74,7 +74,7 @@ async def on_message(message):
             embed.add_field(name="Gen: " , value=str(lastAnime["Gen"].replace("[","").replace('"',"").replace("]","").replace(",",", ")), inline=True)
             embed.add_field(name="Time: " , value=str(lastAnime["time"].replace(",- ", "")), inline=True)
             if lastAnime["Rating"] is None:
-                embed.add_field(name="Rating: " , value=str(lastAnime["Rating"].replace("", "-")), inline=True)
+                embed.add_field(name="Rating: " , value="-", inline=True)
             else:
                 embed.add_field(name="Rating: " , value=str(lastAnime["Rating"]), inline=True)
             embed.set_image(url=(str(lastAnime["img"])).replace("\\",""))
