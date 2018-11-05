@@ -47,7 +47,7 @@ async def check_new_animes():
             try:
                 await client.send_message(AnimeLogChannel, embed=embed)
             except discord.HTTPException:
-            print(embed.to_dict())
+                print(embed.to_dict())
                 raise
         lastAnime = newAnime
         await asyncio.sleep(1)
