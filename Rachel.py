@@ -73,7 +73,10 @@ async def on_message(message):
             embed.add_field(name="Rate: " , value=str(lastAnime["Rate"]), inline=True)
             embed.add_field(name="Gen: " , value=str(lastAnime["Gen"].replace("[","").replace('"',"").replace("]","").replace(",",", ")), inline=True)
             embed.add_field(name="Time: " , value=str(lastAnime["time"].replace(",- ", "")), inline=True)
-            embed.add_field(name="Rating: " , value=str(if lastAnime["Rating"] is None: return lastAnime["Rating"].replace("", "-") else: return lastAnime["Rating"]), inline=True)
+            if lastAnime["Rating"] is None:
+                embed.add_field(name="Rating: " , value=str(lastAnime["Rating"].replace("", "-")), inline=True)
+            else:
+                embed.add_field(name="Rating: " , value=str(lastAnime["Rating"]), inline=True)
             embed.set_image(url=(str(lastAnime["img"])).replace("\\",""))
             try:
                 await client.send_message(AnimeLogChannel, embed=embed)
