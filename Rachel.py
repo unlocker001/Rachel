@@ -42,7 +42,10 @@ async def check_new_animes():
             embed.add_field(name="Rate: " , value=str(lastAnime["Rate"]), inline=True)
             embed.add_field(name="Gen: " , value=str(lastAnime["Gen"].replace("[","").replace('"',"").replace("]","").replace(",",", ")), inline=True)
             embed.add_field(name="Time: " , value=str(lastAnime["time"].replace(",- ", "")), inline=True)
-            embed.add_field(name="Rating: " , value=str(lastAnime["Rating"]), inline=True)
+            if lastAnime["Rating"] == "":
+                embed.add_field(name="Rating: " , value="-", inline=True)
+            else:
+                embed.add_field(name="Rating: " , value=str(lastAnime["Rating"]), inline=True)
             embed.set_image(url=(str(lastAnime["img"])).replace("\\",""))
             try:
                 await client.send_message(AnimeLogChannel, embed=embed)
