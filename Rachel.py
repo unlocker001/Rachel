@@ -65,24 +65,21 @@ async def on_message(message):
             exit()
         if message.content.startswith("!lastAnime"):
             lastAnime = eval(requests.get("http://animeslayer.com/Data/newSystem/NewGet.php?fu=1").content)[0]
-            for k in lastAnime:
-                if lastAnime[k] is None:
-                    lastAnime[k]="-"
-                    AnimeLogChannel = discord.Object(id=504382218961944607)
-                    embed=discord.Embed(color=0xffa500)
-                    embed.add_field(name="Title: " , value=str(lastAnime["Title"]), inline=True)
-                    embed.add_field(name="State: " , value=str(lastAnime["State"]), inline=True)
-                    embed.add_field(name="Year: " , value=str(lastAnime["Year"]), inline=True)
-                    embed.add_field(name="Rate: " , value=str(lastAnime["Rate"]), inline=True)
-                    embed.add_field(name="Gen: " , value=str(lastAnime["Gen"].replace("[","").replace('"',"").replace("]","").replace(",",", ")), inline=True)
-                    embed.add_field(name="Time: " , value=str(lastAnime["time"].replace(",- ", "")), inline=True)
-                    embed.add_field(name="Rating: " , value=str(lastAnime["Rating"]), inline=True)
-                    embed.set_image(url=(str(lastAnime["img"])).replace("\\",""))
-                    try:
-                        await client.send_message(AnimeLogChannel, embed=embed)
-                    except discord.HTTPException:
-                        print(embed.to_dict())
-                        raise
+            AnimeLogChannel = discord.Object(id=504382218961944607)
+            embed=discord.Embed(color=0xffa500)
+            embed.add_field(name="Title: " , value=str(lastAnime["Title"].replace("", "-")), inline=True)
+            embed.add_field(name="State: " , value=str(lastAnime["State"].replace("", "-")), inline=True)
+            embed.add_field(name="Year: " , value=str(lastAnime["Year"].replace("", "-")), inline=True)
+            embed.add_field(name="Rate: " , value=str(lastAnime["Rate"].replace("", "-")), inline=True)
+            embed.add_field(name="Gen: " , value=str(lastAnime["Gen"].replace("[","").replace('"',"").replace("]","").replace(",",", ").replace("", "-")), inline=True)
+            embed.add_field(name="Time: " , value=str(lastAnime["time"].replace(",- ", "")), inline=True)
+            embed.add_field(name="Rating: " , value=str(lastAnime["Rating"].replace("", "-")), inline=True)
+            embed.set_image(url=(str(lastAnime["img"])).replace("\\",""))
+            try:
+                await client.send_message(AnimeLogChannel, embed=embed)
+            except discord.HTTPException:
+                print(embed.to_dict())
+                raise
 
 @client.event
 async def on_member_join(member):
