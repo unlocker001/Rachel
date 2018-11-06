@@ -95,28 +95,34 @@ async def on_member_join(member):
 @client.event
 async def on_reaction_add(reaction, user):
     roleChannelId = '503638566405013505'
+    Welcome =  yield from client.logs_from(get_channel(roleChannelId))
     if reaction.message.channel.id != roleChannelId:
         return
     if user != client.user:
-        if str(reaction.emoji) == "<:TohruPoint:503633376524107776>":
-            Role = discord.utils.get(user.server.roles, name="Anime")
-            await client.add_roles(user, Role)
-        if str(reaction.emoji) == "<:NekoChen:503633274594394123>":
-            Role = discord.utils.get(user.server.roles, name="Manga")
-            await client.add_roles(user, Role)
+        for message in Welcome:
+            if reaction.message.id == message.id:
+                if str(reaction.emoji) == "<:TohruPoint:503633376524107776>":
+                    Role = discord.utils.get(user.server.roles, name="Anime")
+                    await client.add_roles(user, Role)
+                if str(reaction.emoji) == "<:NekoChen:503633274594394123>":
+                    Role = discord.utils.get(user.server.roles, name="Manga")
+                    await client.add_roles(user, Role)
 
 @client.event
 async def on_reaction_remove(reaction, user):
     roleChannelId = '503638566405013505'
+    Welcome =  yield from client.logs_from(get_channel(roleChannelId))
     if reaction.message.channel.id != roleChannelId:
         return
     if user != client.user:
-        if str(reaction.emoji) == "<:TohruPoint:503633376524107776>":
-            Role = discord.utils.get(user.server.roles, name="Anime")
-            await client.remove_roles(user, Role)
-        if str(reaction.emoji) == "<:NekoChen:503633274594394123>":
-            Role = discord.utils.get(user.server.roles, name="Manga")
-            await client.remove_roles(user, Role)
+        for message in Welcome:
+            if reaction.message.id == message.id:
+                if str(reaction.emoji) == "<:TohruPoint:503633376524107776>":
+                    Role = discord.utils.get(user.server.roles, name="Anime")
+                    await client.remove_roles(user, Role)
+                if str(reaction.emoji) == "<:NekoChen:503633274594394123>":
+                    Role = discord.utils.get(user.server.roles, name="Manga")
+                    await client.remove_roles(user, Role)
 
 @client.event
 async def on_message_delete(message):
