@@ -1,8 +1,6 @@
 import discord
 import asyncio
 import datetime
-from lxml import objectify
-from lxml import etree
 import html
 import re
 import config
