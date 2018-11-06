@@ -95,7 +95,7 @@ async def on_member_join(member):
 @client.event
 async def on_reaction_add(reaction, user):
     roleChannelId = '503638566405013505'
-    Welcome =  yield from client.logs_from(get_channel(roleChannelId))
+    Welcome =  yield client.logs_from(get_channel(roleChannelId))
     if reaction.message.channel.id != roleChannelId:
         return
     if user != client.user:
@@ -111,7 +111,7 @@ async def on_reaction_add(reaction, user):
 @client.event
 async def on_reaction_remove(reaction, user):
     roleChannelId = '503638566405013505'
-    Welcome =  yield from client.logs_from(get_channel(roleChannelId))
+    Welcome =  yield client.logs_from(get_channel(roleChannelId))
     if reaction.message.channel.id != roleChannelId:
         return
     if user != client.user:
