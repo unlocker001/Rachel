@@ -91,6 +91,15 @@ async def on_message(message):
 async def on_member_join(member):
     Role = discord.utils.get(member.server.roles, name="Otaku")
     await client.add_roles(member, Role)
+    JoiningLogChannel = discord.Object(id=510846615880335361)
+    embed=discord.Embed(description=str(member.mention)+" joined.", color=0xffa500)
+    await client.send_message(JoiningLogChannel, embed=embed)
+
+@client.event
+async def on_member_remove(member):
+    JoiningLogChannel = discord.Object(id=510846615880335361)
+    embed=discord.Embed(description=str(member.mention)+" left.", color=0xffa500)
+    await client.send_message(JoiningLogChannel, embed=embed)
 
 @client.event
 async def on_reaction_add(reaction, user):
