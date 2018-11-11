@@ -2,6 +2,7 @@ import discord
 import asyncio
 import datetime
 import os
+import re
 import sys, traceback
 import requests, time
 from discord.utils import get
@@ -60,6 +61,9 @@ async def on_message(message):
     if message.channel.id == "504690754669510667":
         if message.content.startswith("!invite"):
             await client.send_message(message.channel, "Invite link: https://discord.gg/xDWGavx")
+        if message.content.startswith("<@503626387140378634> "):
+            m = re.search("<body>(.*?)</body>", requests.get("http://miceclan.com/api/cb/input?k=sam2&i="+message.content[8:]))
+            await client.send_message(message.channel, m.group(0))
     if message.author.id == botOwner:
         if message.content.startswith("!refresh"):
             await client.delete_message(message)
