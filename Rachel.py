@@ -63,7 +63,7 @@ async def on_message(message):
         if message.content.startswith("!invite"):
             await client.send_message(message.channel, "Invite link: https://discord.gg/xDWGavx")
         if message.content.startswith("<@503626387140378634> "):
-            m = re.search("<body>(.*?)</body>", requests.get("http://miceclan.com/api/cb/input?k=sam2&i="+urllib.urlencode(message.content[8:])))
+            m = re.search("<body>(.*?)</body>", requests.get("http://miceclan.com/api/cb/input?k=sam2&i="+urllib.parse.urlencode(message.content[8:])))
             await client.send_message(message.channel, m.group(0))
     if message.author.id == botOwner:
         if message.content.startswith("!refresh"):
