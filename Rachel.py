@@ -94,7 +94,6 @@ async def on_message(message):
         if message.content.startswith("AQ!character"):
             await client.delete_message(message)
     if message.author.id == "464004630632988672":
-        await client.send_message(message.channel, "`"+str(message.content)+"`")
         if message.content.startswith("🎉 "):
             await client.pin_message(message)
 
