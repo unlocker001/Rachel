@@ -91,6 +91,14 @@ async def on_message(message):
             except discord.HTTPException:
                 print(embed.to_dict())
                 raise
+        if message.channel.id == "515976633111543808":
+            if message.content.startswith("AQ!character"):
+                await client.delete_message(message)
+    if message.channel.id == "515976633111543808":
+        if message.author.id == "464004630632988672":
+            await client.send_message(message.channel, "`"+str(message.content)+"`")
+            if message.content.startswith("🎉 "):
+                await client.pin_message(message)
 
 @client.event
 async def on_member_join(member):
