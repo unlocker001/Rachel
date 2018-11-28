@@ -151,13 +151,13 @@ async def on_message_delete(message):
 @client.event
 async def on_message_edit(before, after):
     now = datetime.datetime.now()
-    if message.author.id != client.user.id:
+    if after.author.id != client.user.id:
         channel = discord.Object(id=503636188901539863)
         embed=discord.Embed(color=0xffa500)
         embed.add_field(name="**Before:**" , value=str(before.content), inline=False)
         embed.add_field(name="**After:**" , value=str(after.content), inline=False)
-        embed.set_author(name=str(message.author), icon_url=str(message.author.avatar_url))
-        embed.set_footer(text="Edited message in #"+str(message.channel.name)+" at "+now.strftime("%Y/%m/%d %H:%M:%S"))
+        embed.set_author(name=str(after.author), icon_url=str(after.author.avatar_url))
+        embed.set_footer(text="Edited message in #"+str(after.channel.name)+" at "+now.strftime("%Y/%m/%d %H:%M:%S"))
         await client.send_message(channel, embed=embed)
 
 client.run('NTAzNjI2Mzg3MTQwMzc4NjM0.Dq5QDg.SK9utIEQ2EJaMoPvpy9RXvZ6R_k')
