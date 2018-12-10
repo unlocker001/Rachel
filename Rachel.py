@@ -59,6 +59,7 @@ async def check_new_animes():
 
 @client.event
 async def on_message(message):
+    now = datetime.datetime.now()
     if message.channel.id == "504690754669510667":
         if message.content.startswith("!invite"):
             await client.send_message(message.channel, "Invite link: https://discord.gg/xDWGavx")
@@ -66,6 +67,17 @@ async def on_message(message):
             m = re.search("<body>(.*?)</body>", requests.get("http://miceclan.com/api/cb/input?k=sam2&i="+urllib.parse.urlencode(message.content[8:])))
             await client.send_message(message.channel, m.group(0))
     if message.author.id == botOwner:
+        if message.content.startswith("!clear"):
+            mm=message.content.split('!clear ')[1]
+            nn=0
+            async for m in client.logs_from(message.channel, limit=int(mm)):
+                await client.delete_message(m)
+                nn+=1
+            embed=discord.Embed(title="<:cleaning:521720398740717569>", description=str(nn)+" messages deleted.", color=0x000080)
+            embed.set_footer(text=now.strftime("%Y/%m/%d %H:%M:%S"))
+            n = await client.send_message(message.channel, embed=embed)
+            await asyncio.sleep(2)
+            await client.delete_message(n)
         if message.content.startswith("!refresh"):
             await client.delete_message(message)
             await client.logout()
