@@ -63,9 +63,6 @@ async def on_message(message):
     if message.channel.id == "504690754669510667":
         if message.content.startswith("!invite"):
             await client.send_message(message.channel, "Invite link: https://discord.gg/xDWGavx")
-        if message.content.startswith("<@503626387140378634> "):
-            m = re.search("<body>(.*?)</body>", requests.get("http://miceclan.com/api/cb/input?k=sam2&i="+urllib.parse.urlencode(message.content[8:])))
-            await client.send_message(message.channel, m.group(0))
     if message.author.id == botOwner:
         if message.content.startswith("!clear"):
             mm=message.content.split('!clear ')[1]
@@ -73,7 +70,7 @@ async def on_message(message):
             async for m in client.logs_from(message.channel, limit=int(mm)):
                 await client.delete_message(m)
                 nn+=1
-            embed=discord.Embed(title="<a:cleaning:521720398740717569>", description=str(nn)+" messages deleted.", color=0x000080)
+            embed=discord.Embed(title="<a:cleaning:521720398740717569> The chat is clean:", description=str(nn)+" messages deleted.", color=0x000080)
             embed.set_footer(text=now.strftime("%Y/%m/%d %H:%M:%S"))
             n = await client.send_message(message.channel, embed=embed)
             await asyncio.sleep(2)
@@ -129,12 +126,14 @@ async def on_reaction_add(reaction, user):
     if reaction.message.channel.id != roleChannelId:
         return
     if user != client.user:
-        if str(reaction.emoji) == "<:TohruPoint:503633376524107776>":
-            Role = discord.utils.get(user.server.roles, name="Anime")
-            await client.add_roles(user, Role)
-        if str(reaction.emoji) == "<:NekoChen:503633274594394123>":
-            Role = discord.utils.get(user.server.roles, name="Manga")
-            await client.add_roles(user, Role)
+        async for m in client.logs_from(roleChannelId, limit=1):
+            if reaction.message.id == m.id:
+                if str(reaction.emoji) == "<:TohruPoint:503633376524107776>":
+                    Role = discord.utils.get(user.server.roles, name="Anime")
+                    await client.add_roles(user, Role)
+                if str(reaction.emoji) == "<:NekoChen:503633274594394123>":
+                    Role = discord.utils.get(user.server.roles, name="Manga")
+                    await client.add_roles(user, Role)
 
 @client.event
 async def on_reaction_remove(reaction, user):
@@ -142,12 +141,14 @@ async def on_reaction_remove(reaction, user):
     if reaction.message.channel.id != roleChannelId:
         return
     if user != client.user:
-        if str(reaction.emoji) == "<:TohruPoint:503633376524107776>":
-            Role = discord.utils.get(user.server.roles, name="Anime")
-            await client.remove_roles(user, Role)
-        if str(reaction.emoji) == "<:NekoChen:503633274594394123>":
-            Role = discord.utils.get(user.server.roles, name="Manga")
-            await client.remove_roles(user, Role)
+        async for m in client.logs_from(roleChannelId, limit=1):
+            if reaction.message.id == m.id:
+                if str(reaction.emoji) == "<:TohruPoint:503633376524107776>":
+                    Role = discord.utils.get(user.server.roles, name="Anime")
+                    await client.remove_roles(user, Role)
+                if str(reaction.emoji) == "<:NekoChen:503633274594394123>":
+                    Role = discord.utils.get(user.server.roles, name="Manga")
+                    await client.remove_roles(user, Role)
 
 @client.event
 async def on_message_delete(message):
