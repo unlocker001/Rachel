@@ -70,7 +70,7 @@ async def on_message(message):
             async for m in client.logs_from(message.channel, limit=int(mm)):
                 await client.delete_message(m)
                 nn+=1
-            embed=discord.Embed(title="<a:cleaning:521720398740717569> The chat is clean:", description=str(nn)+" messages deleted.", color=0x000080)
+            embed=discord.Embed(title="<a:cleaning:521720398740717569> The chat is clean:", description=str(nn)+" messages deleted.", color=0xffa500)
             embed.set_footer(text=now.strftime("%Y/%m/%d %H:%M:%S"))
             n = await client.send_message(message.channel, embed=embed)
             await asyncio.sleep(2)
