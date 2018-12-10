@@ -119,7 +119,7 @@ async def on_reaction_add(reaction, user):
     if reaction.message.channel.id != roleChannelId:
         return
     if user != client.user:
-        async for m in client.logs_from(roleChannelId, limit=1):
+        async for m in client.logs_from(client.get_channel('503638566405013505'), limit=1):
             if reaction.message.id == m.id:
                 if str(reaction.emoji) == "<:TohruPoint:503633376524107776>":
                     Role = discord.utils.get(user.server.roles, name="Anime")
@@ -134,7 +134,7 @@ async def on_reaction_remove(reaction, user):
     if reaction.message.channel.id != roleChannelId:
         return
     if user != client.user:
-        async for m in client.logs_from(roleChannelId, limit=1):
+        async for m in client.logs_from(client.get_channel('503638566405013505'), limit=1):
             if reaction.message.id == m.id:
                 if str(reaction.emoji) == "<:TohruPoint:503633376524107776>":
                     Role = discord.utils.get(user.server.roles, name="Anime")
